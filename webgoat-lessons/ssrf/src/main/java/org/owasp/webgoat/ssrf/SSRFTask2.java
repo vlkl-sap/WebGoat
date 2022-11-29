@@ -50,6 +50,8 @@ public class SSRFTask2 extends AssignmentEndpoint {
     protected AttackResult furBall(String url) {
         if (url.matches("http://ifconfig.pro")) {
             String html;
+		if (VALID_URI.equals(url)) {
+          
             try (InputStream in = new URL(url).openStream()) {
                 html = new String(in.readAllBytes(), StandardCharsets.UTF_8)
                         .replaceAll("\n","<br>"); // Otherwise the \n gets escaped in the response
@@ -64,7 +66,7 @@ public class SSRFTask2 extends AssignmentEndpoint {
                     .feedback("ssrf.success")
                     .output(html)
                     .build();
-        }
+        }}
         var html = "<img class=\"image\" alt=\"image post\" src=\"images/cat.jpg\">";
         return getFailedResult(html);
     }
